@@ -37,13 +37,36 @@ name : capstone-igw
 ** variables.tf **
 선언된 모든 서브넷 id 받아옴
 
-# ec2 모듈 생성
-
-
 # 보안 그룹 모듈 생성
+## main.tf
+** NatVPN 게이트웨이 보안그룹 **
+name : capstone-natvpn-sg
+인바운드
+UDP 51820 0.0.0.0 
+TCP IP 22 0.0.0.0
+All All 17.16.0.0/16 
+아웃바운드
+All 0.0.0.0
+
+## outputs.tf
+sg id 내보냄
+
+# ec2 모듈 생성
+## main.tf
+**NatVPN 게이트웨이 ec2 **
+name : NatVPN Gateway
+고정 ip 생성 및 할당.
+subnet : capstone-public-subnet
+sg : capstone-natvpn-sg
+스펙 : t3.micro
+os : amazon 리눅스 최신버전 지정
+키 선택 : nat.pem
+
+## variables.tf
+ 서브넷 id 받음 /보안 그룹 id 받음
+## outputs.tf
+ec2 id 내보냄 
 
 # stage 
 -- 호출 대상--
-vpc 모듈
-subnet 모듈
-igw 모듈
+modules 내 전부
