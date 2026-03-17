@@ -1,0 +1,4 @@
+CapstoneAIServer/stage/.terraform
+CapstoneAIServer/stage/.terraform.lock.hcl
+CapstoneAIServer/stage/terraform.tfstate
+CapstoneAIServer/stage/terraform.tfvars
