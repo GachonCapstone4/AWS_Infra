@@ -6,13 +6,13 @@ variable "security_group_id" {
   type = string
 }
 
-data "aws_ami" "amazon_linux" {
+data "aws_ami" "ubuntu" {
   most_recent = true
-  owners      = ["amazon"]
+  owners      = ["099720109477"]
 
   filter {
     name   = "name"
-    values = ["al2023-ami-*-x86_64"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
   }
 
   filter {
@@ -22,11 +22,12 @@ data "aws_ami" "amazon_linux" {
 }
 
 resource "aws_instance" "natvpn_gateway" {
-  ami                    = data.aws_ami.amazon_linux.id
+  ami                    = data.aws_ami.ubuntu.id
   instance_type          = "t3.micro"
   subnet_id              = var.subnet_id
   vpc_security_group_ids = [var.security_group_id]
   key_name               = "nat"
+  private_ip             = "172.16.1.10"
 
   tags = {
     Name = "NatVPN Gateway"

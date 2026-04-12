@@ -19,7 +19,7 @@ az : ap-northeat-2a
 public_ip 자동 할당: false
 
 captstone-ai-subnet 생성
--- capstone-public-subnet --
+-- capstone-ai-subnet --
 vpc : capstone-vpc
 ip : 172.16.2.0/24
 az : ap-northeast-2a
@@ -59,8 +59,9 @@ name : NatVPN Gateway
 subnet : capstone-public-subnet
 sg : capstone-natvpn-sg
 스펙 : t3.micro
-os : amazon 리눅스 최신버전 지정
+os : 우분투 22.04
 키 선택 : nat.pem
+사설 ip : 172.16.1.10
 
 ## variables.tf
  서브넷 id 받음 /보안 그룹 id 받음
