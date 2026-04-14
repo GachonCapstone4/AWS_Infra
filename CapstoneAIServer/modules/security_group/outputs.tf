@@ -1,3 +1,6 @@
 output "sg_id" {
-  value = aws_security_group.natvpn_sg.id
+  value = {
+    natvpn = aws_security_group.natvpn_sg.id
+    ai     = aws_security_group.ai_server_sg.id
+  }
 }

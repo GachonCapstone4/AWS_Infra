@@ -34,6 +34,7 @@ subnet_id 내보냄
 name : capstone-igw
 ** routingtable.tf **
 0.0.0.0 public subnet - igw 연결
+0.0.0.0 ai subnet - NatVPN 게이트웨이 ec2 연결
 ** variables.tf **
 선언된 모든 서브넷 id 받아옴
 
@@ -44,7 +45,13 @@ name : capstone-natvpn-sg
 인바운드
 UDP 51820 0.0.0.0 
 TCP IP 22 0.0.0.0
-All All 17.16.0.0/16 
+All All 17.16.0.0/16
+아웃바운드
+All 0.0.0.0
+
+** AI 서버 보안그룹 **
+NatVPN 게이트웨이로 부터오는 모든 트래픽 허용
+All All 172.16.0.0/16
 아웃바운드
 All 0.0.0.0
 
@@ -62,6 +69,18 @@ sg : capstone-natvpn-sg
 os : 우분투 22.04
 키 선택 : nat.pem
 사설 ip : 172.16.1.10
+
+
+
+
+**AI EC2 **
+name : AIserver
+lan ip : 172.16.2.10 할당
+subnet : capstone-ai-subnet
+스펙 : t3.미디움
+volume : 10gb
+os : 우분투 22.04
+키 선택 : nat.pem
 
 ## variables.tf
  서브넷 id 받음 /보안 그룹 id 받음
