@@ -39,3 +39,7 @@ module "routing" {
   subnet_id        = module.subnet.subnet_id
   natvpn_eni_id    = module.ec2.natvpn_eni_id
 }
+
+module "ecr" {
+  source = "../modules/ecr"
+}
